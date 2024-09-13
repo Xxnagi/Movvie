@@ -3,7 +3,7 @@ import Link from "next/link";
 import { convertToUrlFormat } from "../constants/function";
 // Import fungsi untuk slug
 
-const Card = ({ movie }) => {
+const Card = ({ movie }: { movie: any }) => {
   const imageUrl = `https://image.tmdb.org/t/p/original${movie.poster_path}`;
   const slug = convertToUrlFormat(movie.title);
 
