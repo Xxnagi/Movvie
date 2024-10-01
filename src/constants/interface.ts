@@ -15,6 +15,13 @@ export interface Movie {
   logos?: { file_path: string }[];
 }
 
+export interface MovieCard {
+  id: string;
+  vote_average: number;
+  poster_path: string;
+  title: string;
+}
+
 export interface ListProps {
   category: MovieCategory; // Use the defined type here
 }

@@ -1,16 +1,18 @@
 "use client";
 import { useEffect, useState } from "react";
-import Slider from "react-slick";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import Card from "./Card";
-// Import the ListPlaceholder component
-import { getMoviesList } from "../config/api";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import ListPlaceholder from "./placeholder/List";
-import { ListProps } from "../constants/interface";
-import { convertType } from "../constants/function";
 
-const List = ({ category }) => {
+import ListPlaceholder from "./placeholder/List";
+import { convertType } from "../../constants/function";
+import "../app.css";
+import { getMoviesList } from "@/config/api";
+
+const List = ({ category }: { category: string }) => {
   const [movies, setMovies] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -18,7 +20,14 @@ const List = ({ category }) => {
     const fetchMovies = async () => {
       try {
         const data = await getMoviesList(category);
-        setMovies(data.results);
+        setMovies(
+          data.results.map((movie: any) => ({
+            id: movie.id,
+            vote_average: movie.vote_average,
+            poster_path: movie.poster_path,
+            title: movie.title,
+          }))
+        );
       } catch (error) {
         console.error("Error fetching movies:", error);
       } finally {
@@ -30,29 +39,27 @@ const List = ({ category }) => {
   }, [category]);
 
   const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToScroll: 1,
-    variableWidth: true, // Let the card width be determined by its content
-    arrows: true,
+    modules: [Navigation],
+    slidesPerView: "auto", // Fixed this line
+
+    navigation: true,
   };
 
   return (
     <section className="p-5 flex justify-center items-center relative">
       <div className="max-w-screen-2xl w-full flex flex-col">
         <h1 className="text-2xl mb-3">{convertType(category)}</h1>
-        <div className="relative w-full p-3 overflow-visible">
+        <div className="relative p-3">
           {loading ? (
             <ListPlaceholder />
           ) : (
-            <Slider {...settings}>
+            <Swiper {...settings}>
               {movies.map((movie) => (
-                <div key={movie.id} className="inline-block w-full w-auto px-2">
+                <SwiperSlide key={movie.id} className="px-2">
                   <Card movie={movie} />
-                </div>
+                </SwiperSlide>
               ))}
-            </Slider>
+            </Swiper>
           )}
         </div>
       </div>
