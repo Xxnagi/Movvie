@@ -3,6 +3,7 @@ import Link from "next/link";
 import { convertToUrlFormat } from "../../constants/function";
 import { MovieCard } from "../../constants/interface";
 
+
 const Card = ({ movie }: { movie: MovieCard }) => {
   const imageUrl = `https://image.tmdb.org/t/p/original${movie.poster_path}`;
   const slug = convertToUrlFormat(movie.title);
