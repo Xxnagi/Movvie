@@ -1,6 +1,7 @@
 "use client";
 import Loader from "@/app/components/Loader";
-import { getMovieDetails } from "@/app/config/api";
+import { getMovieDetails } from "@/config/api";
+
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
@@ -39,7 +40,7 @@ export default function MovieDetail({ params: { slug } }: MovieDetailParams) {
   const backdropUrl = `https://image.tmdb.org/t/p/original${movieData.backdrop_path}`;
 
   return (
-    <section className="relative w-full flex justify-center">
+    <section className="relative w-full h-screen flex justify-center">
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{ backgroundImage: `url(${backdropUrl})` }}
