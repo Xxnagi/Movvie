@@ -35,12 +35,19 @@ const Navbar = () => {
           <h1 className="font-bold text-2xl text-white">Movvie</h1>
         </Link>
 
+        {/* <div className="flex-1 flex justify-center">
+          <div className="flex p-3 rounded-full backdrop-blur bg-slate-500/70 justify-center max-sm:hidden">
+           
+          </div>
+        </div> */}
+
         <div className="flex max-sm:justify-end">
           {isLoggedIn ? (
             <div className="relative w-10 h-10 rounded-full overflow-hidden">
               <Image
-                src={`https://image.tmdb.org/t/p/w500${userAvatar}`}
+                src={`https://image.tmdb.org/t/p/original${userAvatar}`}
                 alt="User Avatar"
+                sizes="100px"
                 fill
                 className="object-cover"
               />

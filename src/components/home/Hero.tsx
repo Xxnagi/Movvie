@@ -7,9 +7,9 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import Link from "next/link";
-import { convertToUrlFormat } from "../../../constants/function";
+import { convertToUrlFormat } from "../../constants/function";
 import HeroPlaceholder from "../placeholder/HeroPlaceholder";
-import { Movie } from "../../../constants/interface";
+import { Movie } from "../../constants/interface";
 import { Button } from "@/components/ui/button";
 import { getMovieLogo, getMoviesList } from "@/app/api/movie";
 
@@ -67,6 +67,7 @@ const Hero = () => {
                   <Image
                     src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
                     fill
+                    priority
                     className="object-cover object-top"
                     alt={movie.title}
                   />
@@ -94,7 +95,7 @@ const Hero = () => {
                   <div className="absolute max-w-screen-2xl mx-auto p-5 inset-0 z-10 flex justify-start items-end gap-5 bottom-10">
                     <Button size={"lg"}>Watch Now</Button>
                     <Link
-                      href={`/detail/${movie.id}-${convertToUrlFormat(
+                      href={`/movie/${movie.id}-${convertToUrlFormat(
                         movie.title
                       )}`}
                     >
