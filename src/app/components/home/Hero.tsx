@@ -7,11 +7,11 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import Link from "next/link";
-import { convertToUrlFormat } from "../../constants/function";
-import HeroPlaceholder from "./placeholder/HeroPlaceholder";
-import { Movie } from "../../constants/interface";
+import { convertToUrlFormat } from "../../../constants/function";
+import HeroPlaceholder from "../placeholder/HeroPlaceholder";
+import { Movie } from "../../../constants/interface";
 import { Button } from "@/components/ui/button";
-import { getMovieLogo, getMoviesList } from "@/config/api";
+import { getMovieLogo, getMoviesList } from "@/app/api/movie";
 
 const Hero = () => {
   const [movies, setMovies] = useState<any[]>([]);
