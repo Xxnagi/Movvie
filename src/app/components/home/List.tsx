@@ -7,10 +7,10 @@ import "swiper/css/pagination";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import Card from "./Card";
 
-import ListPlaceholder from "./placeholder/List";
-import { convertType } from "../../constants/function";
-import "../app.css";
-import { getMoviesList } from "@/config/api";
+import ListPlaceholder from "../placeholder/List";
+import { convertType } from "../../../constants/function";
+import "../../app.css";
+import { getMoviesList } from "@/app/api/movie";
 
 const List = ({ category }: { category: string }) => {
   const [movies, setMovies] = useState<any[]>([]);
@@ -19,7 +19,9 @@ const List = ({ category }: { category: string }) => {
   useEffect(() => {
     const fetchMovies = async () => {
       try {
-        const data = await getMoviesList(category);
+        const data = await getMoviesList(
+          category as "now_playing" | "popular" | "top_rated" | "upcoming"
+        );
         setMovies(
           data.results.map((movie: any) => ({
             id: movie.id,
@@ -55,7 +57,7 @@ const List = ({ category }: { category: string }) => {
           ) : (
             <Swiper {...settings}>
               {movies.map((movie) => (
-                <SwiperSlide key={movie.id} className="px-2">
+                <SwiperSlide key={movie.id} className="px-2 w-auto">
                   <Card movie={movie} />
                 </SwiperSlide>
               ))}
