@@ -14,7 +14,13 @@ const List = ({ category }: { category: string }) => {
   const { movies, loading } = useMovieList(
     category as "now_playing" | "popular" | "top_rated" | "upcoming"
   );
-  const settings = { modules: [Navigation], slidesPerView: "auto" };
+
+  // Corrected settings object
+  const settings = {
+    modules: [Navigation],
+    slidesPerView: "auto" as const, // Use 'as const' to ensure TypeScript understands it's a literal type
+  };
+
   return (
     <section className="p-5 flex justify-center items-center relative">
       <div className="max-w-screen-2xl w-full flex flex-col">
