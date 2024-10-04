@@ -1,6 +1,7 @@
 "use client";
-import Loader from "@/app/components/Loader";
+
 import { getMovieDetails } from "@/app/api/movie";
+import Loader from "@/components/Loader";
 
 import Image from "next/image";
 import { useEffect, useState } from "react";

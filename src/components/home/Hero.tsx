@@ -1,49 +1,20 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import { Navigation, Pagination, Autoplay } from "swiper/modules";
+
 import Link from "next/link";
 import { convertToUrlFormat } from "../../constants/function";
 import HeroPlaceholder from "../placeholder/HeroPlaceholder";
-import { Movie } from "../../constants/interface";
 import { Button } from "@/components/ui/button";
-import { getMovieLogo, getMoviesList } from "@/app/api/movie";
+import { useHeroData } from "@/hooks/useHeroData";
+import { Autoplay } from "swiper/modules";
 
 const Hero = () => {
-  const [movies, setMovies] = useState<any[]>([]);
-  const [logos, setLogos] = useState<Record<number, { file_path: string }[]>>(
-    {}
-  );
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchMovies = async () => {
-      try {
-        const data = await getMoviesList("popular");
-        const movieList = data.results;
-        setMovies(movieList);
-        const logoPromises = movieList.map(async (movie: any) => {
-          const logoData = await getMovieLogo(movie.id);
-          return { movieId: movie.id, logos: logoData.logos };
-        });
-
-        const logoResults = await Promise.all(logoPromises);
-        const logoMap = logoResults.reduce((acc, { movieId, logos }) => {
-          acc[movieId] = logos;
-          return acc;
-        }, {} as Record<number, { file_path: string }[]>);
-        setLogos(logoMap);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchMovies();
-  }, []);
+  const { movies, logos, loading } = useHeroData();
 
   const settings = {
     modules: [Autoplay],

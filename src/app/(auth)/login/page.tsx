@@ -1,5 +1,4 @@
-import AuthCard from "@/app/components/login/AuthCard";
-import LoginForm from "@/app/components/login/LoginForm";
+import LoginForm from "@/components/login/LoginForm";
 
 const page = () => {
   return (

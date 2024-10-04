@@ -21,3 +21,14 @@ export function convertType(title: string): string {
       return title;
   }
 }
+
+import { Navigation, Pagination, Autoplay } from "swiper/modules";
+
+export const heroSettings = {
+  modules: ["Autoplay"],
+  loop: true,
+  slidesPerView: 1,
+  pagination: { clickable: true },
+  autoplay: { delay: 5000 },
+  className: "w-full",
+};
